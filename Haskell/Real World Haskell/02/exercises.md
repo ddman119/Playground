@@ -8,4 +8,6 @@
 
 This function can take an array of some type, and return a single instance of that type.
 
-It cannot return a modified value of a, or some other value. It can purely return one instance of a type that exists in the given array.
+It cannot return a modified value of a, or some other value. It can purely return one of the values that exists in the given array.
+
+It also cannot do anything that would involve side effects, like downloading data from the network.
