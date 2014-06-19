@@ -31,7 +31,13 @@ data BetterReview = BetterReview BookInfo CustomerID ReviewBody
 
 type BookRecord = (BookInfo, BookReview)
 
--- Display billing information:
+-- Extract book information:
+
+bookID (Book id _ _) = id
+bookTitle (Book _ title _) = title
+bookAuthors (Book _ _ authors) = authors
+
+-- Billing information:
 
 type CardHolder = String
 type CardNumber = String
@@ -41,3 +47,11 @@ data BillingInfo = CreditCard CardNumber CardHolder Address
                  | CashOnDelivery
                  | Invoice CustomerID
                    deriving (Show)
+
+-- Customer information:
+
+data Customer = Customer {
+       customerID :: CustomerID
+     , customerName :: String
+     , customerAddress :: Address
+     } deriving (Show)
