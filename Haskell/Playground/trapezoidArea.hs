@@ -1,6 +1,6 @@
-type TopBase = Int
-type BottomBase = Int
-type Height = Int
+type TopBase = Float
+type BottomBase = Float
+type Height = Float
 
 data Trapezoid = Trapezoid {
     topBase :: TopBase
@@ -8,6 +8,5 @@ data Trapezoid = Trapezoid {
   , height :: Height
   } deriving (Show)
 
-trapezoidArea :: Trapezoid -> Int
-trapezoidArea (Trapezoid top bottom height) = height * ((top + bottom) / 2)
-trapezoidArea _ = 0
+trapezoidArea :: Trapezoid -> Float
+trapezoidArea (Trapezoid top bottom height) = height * ((top + bottom) / 2.0)
