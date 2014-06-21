@@ -29,3 +29,10 @@ orderByLength x y = compare (length x) (length y)
 
 sortByLength :: [[a]] -> [[a]]
 sortByLength xs = sortBy (orderByLength) xs
+
+-- Exercise 7 & 8:
+
+intersperse :: a -> [[a]] -> [a]
+intersperse _ [] = []
+intersperse _ (x:[]) = x
+intersperse separator (x:xs) = x ++ separator:(intersperse separator xs)
