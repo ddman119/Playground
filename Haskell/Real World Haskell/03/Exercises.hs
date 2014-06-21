@@ -25,7 +25,7 @@ isPalindrome xs = xs == reverse xs
 -- Exercise 6:
 
 orderByLength :: [a] -> [b] -> Ordering
-orderByLength x y = compare (length x) (length y) 
+orderByLength x y = compare (length x) (length y)
 
 sortByLength :: [[a]] -> [[a]]
 sortByLength xs = sortBy (orderByLength) xs
@@ -36,3 +36,14 @@ intersperse :: a -> [[a]] -> [a]
 intersperse _ [] = []
 intersperse _ (x:[]) = x
 intersperse separator (x:xs) = x ++ separator:(intersperse separator xs)
+
+-- Exercise 10:
+
+data Direction = LeftTurn | RightTurn | Straight deriving (Show)
+
+-- Exercise 11:
+
+type Point = (a, b)
+
+turnMade :: Point -> Point -> Point -> Direction
+turnMade (a, b, c) = Straight -- Fake the response for now.
