@@ -11,3 +11,9 @@ text str = undefined
 
 double :: Double -> Doc
 double num = undefined
+
+(<>) :: Doc -> Doc -> Doc
+a <> b = undefined
+
+hcat :: [Doc] -> Doc
+hcat xs = undefined
