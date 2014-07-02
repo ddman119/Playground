@@ -21,9 +21,9 @@ instance BasicEq Color where
   isEqual _ _ = False
 
 instance Show Color where
-  show Red = "Red Color"
-  show Blue = "Blue Color"
-  show Green = "Green Color"
+  show Red = "Red"
+  show Blue = "Blue"
+  show Green = "Green"
 
 instance Read Color where
   -- readsPrec is a function defined by Haskell for parsing a value.
