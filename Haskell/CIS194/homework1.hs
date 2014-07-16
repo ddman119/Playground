@@ -1,5 +1,7 @@
 import Data.Char (digitToInt)
 
+-- Credit card validation:
+
 -- Exercise 1:
 
 toDigits :: Integer -> [Integer]
@@ -26,3 +28,16 @@ sumDigits xs = sum $ map (sum . toDigits) xs
 validate :: Integer -> Bool
 validate number = processedNumber `mod` 10 == 0
   where processedNumber = sumDigits . doubleEveryOther . toDigitsRev $ number
+
+-- Towers of Hanoi:
+
+-- Exercise 5:
+
+type Peg = String
+type Move = (Peg, Peg)
+
+hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
+hanoi 0 _ _ _ = []
+hanoi number starting target temporary = hanoi (number - 1) starting temporary target ++
+                                         [(starting, target)] ++
+                                         hanoi (number - 1) temporary target starting
