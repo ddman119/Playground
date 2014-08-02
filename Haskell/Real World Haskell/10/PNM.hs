@@ -36,6 +36,22 @@ parseP5 s =
                           Just (bitmap, s6) ->
                             Just (Greymap width height maxGrey bitmap, s6)
 
+parseP5Simplified :: L.ByteString -> Maybe (Greymap, L.ByteString)
+parseP5Simplified s =
+  matchHeader (L8.pack "P5") s >>?
+  \s -> skipSpace ((), s) >>?
+  (getNat . snd) >>?
+  skipSpace >>?
+  \(width, s) -> getNat s >>?
+  skipSpace >>?
+  \(height, s) -> getNat s >>?
+  \(maxGrey, s) -> getBytes 1 s >>?
+  (getBytes (width * height) . snd) >>?
+  \(bitmap, s) -> Just (Greymap width height maxGrey bitmap, s)
+
+skipSpace :: (a, L.ByteString) -> Maybe (a, L.ByteString)
+skipSpace (a, s) = Just (a, L8.dropWhile isSpace s)
+
 matchHeader :: L.ByteString -> L.ByteString -> Maybe L.ByteString
 matchHeader prefix string
   | prefix `L8.isPrefixOf` string = Just (L8.dropWhile isSpace (L.drop (L.length prefix) string))
@@ -54,3 +70,7 @@ getBytes n str = let count = fromIntegral n
                  in if L.length prefix < count
                    then Nothing
                    else Just both
+
+(>>?) :: Maybe a -> (a -> Maybe b) -> Maybe b
+Nothing >>? _ = Nothing
+Just v >>? func = func v
