@@ -5,17 +5,18 @@
 -- `over` takes a function which takes a String and returns a String, a User, and returns a User.
 data NaiveLens s a = NaiveLens {
   view :: s -> a,
-  set :: a -> s -> s,
   over :: (a -> a) -> s -> s
 }
+
+-- In our case, this takes a NaiveLens, a String, a User, and returns a User.
+set :: NaiveLens s a -> a -> s -> s
+set ln a s = over ln (const a) s
 
 data User = User { name :: String, age :: Int } deriving Show
 data Project = Project { owner :: User } deriving Show
 
--- `over` here is very similar to the function for `set`, except it calls its f parameter on the new value
--- before setting it.
 nameLens :: NaiveLens User String
-nameLens = NaiveLens name (\a s -> s { name = a }) (\f s -> s { name = f (name s) })
+nameLens = NaiveLens name (\f s -> s { name = f (name s) })
 
 ageLens :: NaiveLens User Int
-ageLens = NaiveLens age (\a s -> s { age = a }) (\f s -> s { age = f (age s) })
+ageLens = NaiveLens age (\f s -> s { age = f (age s) })
