@@ -8,14 +8,31 @@
 
 #import "SOSAppDelegate.h"
 
+#import "SOSDevicesViewController.h"
+#import "SOSPeripheralViewController.h"
+
 @implementation SOSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+    
+    id viewController;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        viewController = [[SOSDevicesViewController alloc] initWithStyle:UITableViewStylePlain];
+    }
+    else {
+        viewController = [[SOSPeripheralViewController alloc] initWithNibName:nil bundle:nil];
+    }
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    self.window.rootViewController = navigationController;
     self.window.backgroundColor = [UIColor whiteColor];
+    
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

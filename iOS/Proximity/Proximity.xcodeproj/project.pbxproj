@@ -19,6 +19,9 @@
 		4B5B4C4D19A24F35000EACAE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5B4C3519A24F35000EACAE /* UIKit.framework */; };
 		4B5B4C5519A24F35000EACAE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B5B4C5319A24F35000EACAE /* InfoPlist.strings */; };
 		4B5B4C5719A24F35000EACAE /* ProximityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5B4C5619A24F35000EACAE /* ProximityTests.m */; };
+		4B5B4C6219A24F65000EACAE /* SOSDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5B4C6119A24F65000EACAE /* SOSDevicesViewController.m */; };
+		4B5B4C6519A2569C000EACAE /* SOSPeripheralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5B4C6419A2569C000EACAE /* SOSPeripheralManager.m */; };
+		4B5B4C6819A258C3000EACAE /* SOSPeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5B4C6719A258C3000EACAE /* SOSPeripheralViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,12 @@
 		4B5B4C5219A24F35000EACAE /* ProximityTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ProximityTests-Info.plist"; sourceTree = "<group>"; };
 		4B5B4C5419A24F35000EACAE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4B5B4C5619A24F35000EACAE /* ProximityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProximityTests.m; sourceTree = "<group>"; };
+		4B5B4C6019A24F65000EACAE /* SOSDevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSDevicesViewController.h; sourceTree = "<group>"; };
+		4B5B4C6119A24F65000EACAE /* SOSDevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSDevicesViewController.m; sourceTree = "<group>"; };
+		4B5B4C6319A2569C000EACAE /* SOSPeripheralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSPeripheralManager.h; sourceTree = "<group>"; };
+		4B5B4C6419A2569C000EACAE /* SOSPeripheralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSPeripheralManager.m; sourceTree = "<group>"; };
+		4B5B4C6619A258C3000EACAE /* SOSPeripheralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSPeripheralViewController.h; sourceTree = "<group>"; };
+		4B5B4C6719A258C3000EACAE /* SOSPeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSPeripheralViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +118,12 @@
 			children = (
 				4B5B4C4019A24F35000EACAE /* SOSAppDelegate.h */,
 				4B5B4C4119A24F35000EACAE /* SOSAppDelegate.m */,
+				4B5B4C6019A24F65000EACAE /* SOSDevicesViewController.h */,
+				4B5B4C6119A24F65000EACAE /* SOSDevicesViewController.m */,
+				4B5B4C6619A258C3000EACAE /* SOSPeripheralViewController.h */,
+				4B5B4C6719A258C3000EACAE /* SOSPeripheralViewController.m */,
+				4B5B4C6319A2569C000EACAE /* SOSPeripheralManager.h */,
+				4B5B4C6419A2569C000EACAE /* SOSPeripheralManager.m */,
 				4B5B4C4319A24F35000EACAE /* Images.xcassets */,
 				4B5B4C3819A24F35000EACAE /* Supporting Files */,
 			);
@@ -240,8 +255,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B5B4C6819A258C3000EACAE /* SOSPeripheralViewController.m in Sources */,
 				4B5B4C4219A24F35000EACAE /* SOSAppDelegate.m in Sources */,
+				4B5B4C6519A2569C000EACAE /* SOSPeripheralManager.m in Sources */,
 				4B5B4C3E19A24F35000EACAE /* main.m in Sources */,
+				4B5B4C6219A24F65000EACAE /* SOSDevicesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
