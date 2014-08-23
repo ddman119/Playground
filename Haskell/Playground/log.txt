@@ -1,0 +1,5 @@
+L: SOSClassName.m (500): Some log message goes here
+L: SOSClassName.m (500): Some log message goes here
+L: SOSClassName.m (500): Some log message goes here
+L: SOSClassName.m (500): Some log message goes here
+L: SOSClassName.m (500): Some log message goes here
