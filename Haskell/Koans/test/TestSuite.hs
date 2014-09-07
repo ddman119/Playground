@@ -6,7 +6,6 @@ import Test.Hspec.Runner (hspecWith , defaultConfig, Config(..), configFilterPre
 import qualified BasicFunctions
 import qualified Lists
 import qualified Currification
-import qualified BasicIO
 import qualified ParserCombinators
 import System.Environment (getArgs)
 import Data.List (isInfixOf)
@@ -25,6 +24,5 @@ main = do
     BasicFunctions.koans
     Lists.koans
     Currification.tests
-    BasicIO.tests
     ParserCombinators.tests
   return ()
