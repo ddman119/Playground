@@ -10,29 +10,29 @@
 	<string>Transitions</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>FC30DBFD-8066-4F7A-AF43-06C74810BEFF</key>
+		<key>26542D8D41464761AED1E506281F1E81B861C890</key>
 		<string>ssh://github.com/samsymons/Learning.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>iOS/Transitions/Transitions.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>FC30DBFD-8066-4F7A-AF43-06C74810BEFF</key>
+		<key>26542D8D41464761AED1E506281F1E81B861C890</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/samsymons/Learning.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>FC30DBFD-8066-4F7A-AF43-06C74810BEFF</string>
+	<string>26542D8D41464761AED1E506281F1E81B861C890</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FC30DBFD-8066-4F7A-AF43-06C74810BEFF</string>
+			<string>26542D8D41464761AED1E506281F1E81B861C890</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Learning</string>
 		</dict>
