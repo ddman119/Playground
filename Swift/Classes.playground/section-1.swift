@@ -16,6 +16,10 @@ class Resolution {
     }
     
     func totalPixels() -> Int {
+        return calculateTotalPixels(width: width, height: height)
+    }
+    
+    private func calculateTotalPixels(width w: Int, height h: Int) -> Int {
         return width * height
     }
 }
