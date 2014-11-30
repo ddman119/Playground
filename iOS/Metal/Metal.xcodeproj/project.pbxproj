@@ -17,6 +17,7 @@
 		4B416E9E1A29148A00981943 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B416E9D1A29148A00981943 /* Metal.framework */; };
 		4B416EA01A29149800981943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B416E9F1A29149800981943 /* QuartzCore.framework */; };
 		4B416EA41A29153800981943 /* MetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B416EA31A29153800981943 /* MetalView.m */; };
+		4B416EA61A2ABE1C00981943 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4B416EA51A2ABE1C00981943 /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		4B416E9F1A29149800981943 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4B416EA21A29153800981943 /* MetalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalView.h; sourceTree = "<group>"; };
 		4B416EA31A29153800981943 /* MetalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetalView.m; sourceTree = "<group>"; };
+		4B416EA51A2ABE1C00981943 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				4B416E7C1A29147800981943 /* AppDelegate.m */,
 				4B416E7E1A29147800981943 /* ViewController.h */,
 				4B416E7F1A29147800981943 /* ViewController.m */,
+				4B416EA51A2ABE1C00981943 /* Shaders.metal */,
 				4B416EA11A29152600981943 /* Examples */,
 				4B416E811A29147800981943 /* Main.storyboard */,
 				4B416E841A29147800981943 /* Images.xcassets */,
@@ -244,6 +247,7 @@
 				4B416E801A29147800981943 /* ViewController.m in Sources */,
 				4B416E7D1A29147800981943 /* AppDelegate.m in Sources */,
 				4B416E7A1A29147800981943 /* main.m in Sources */,
+				4B416EA61A2ABE1C00981943 /* Shaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +438,7 @@
 				4B416E991A29147800981943 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4B416E9A1A29147800981943 /* Build configuration list for PBXNativeTarget "MetalTests" */ = {
 			isa = XCConfigurationList;
@@ -442,6 +447,7 @@
 				4B416E9C1A29147800981943 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
