@@ -31,6 +31,8 @@
         [self buildDevice];
         [self buildVertexBuffers];
         [self buildPipeline];
+        
+        self.contentScaleFactor = [[UIScreen mainScreen] scale];
     }
     
     return self;
