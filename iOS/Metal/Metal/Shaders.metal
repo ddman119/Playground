@@ -14,6 +14,8 @@ struct ColoredVertex {
     float4 color;
 };
 
+// Vertex shaders take vertex data and return a vertex to be rendered on-screen.
+// We're playing it safe here and just using the data which was passed in.
 vertex ColoredVertex vertex_main(constant float4 *position [[buffer(0)]], constant float4 *color [[buffer(1)]], uint vid [[vertex_id]])
 {
     ColoredVertex vert;
@@ -24,6 +26,7 @@ vertex ColoredVertex vertex_main(constant float4 *position [[buffer(0)]], consta
     return vert;
 }
 
+// Fragment shaders return the color for each fragment.
 fragment float4 fragment_main(ColoredVertex vert [[stage_in]])
 {
     return vert.color;

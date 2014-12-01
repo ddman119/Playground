@@ -75,16 +75,16 @@
 {
     static const float positions[] =
     {
-        0.0,  0.3, 0, 1,
-        -0.5, -0.2, 0, 1,
-        0.5, -0.2, 0, 1,
+        0.0,  0.3, 0, 1, // Top
+        -0.5, -0.2, 0, 1, // Bottom Left
+        0.5, -0.2, 0, 1, // Bottom Right
     };
     
     static const float colors[] =
     {
-        1, 0, 0, 1,
-        0, 1, 0, 1,
         0, 0, 1, 1,
+        0, 1, 0, 1,
+        1, 0, 0, 1,
     };
     
     self.positionBuffer = [self.device newBufferWithBytes:positions length:sizeof(positions) options:MTLResourceOptionCPUCacheModeDefault];
