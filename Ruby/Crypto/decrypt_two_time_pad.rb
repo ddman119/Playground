@@ -23,7 +23,7 @@ def xor_hex_strings(first, second)
 
   zipped = hex_to_binary(shortest).bytes.zip(hex_to_binary(truncated_longest).bytes)
   result = zipped.map { |a,b| a ^ b }.pack('C*')
-  [result].pack('H*')
+  result.each_byte.map { |b| b.to_s(16) }.join
 end
 
 def hex_to_binary(hex_string)
