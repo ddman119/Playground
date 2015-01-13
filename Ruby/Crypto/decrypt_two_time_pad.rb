@@ -20,15 +20,6 @@ def xor_hex_strings(first, second)
   truncated_longest = longest[0...shortest.length]
 
   puts "XORing"
-
-  zipped = hex_to_binary(shortest).bytes.zip(hex_to_binary(truncated_longest).bytes)
-  result = zipped.map { |a,b| a ^ b }.pack('C*')
-  result.each_byte.map { |b| b.to_s(16) }.join
-end
-
-def hex_to_binary(hex_string)
-  puts hex_string
-  hex_string.scan(/../).map { |x| x.hex.chr }.join
 end
 
 first = ciphertexts[0]
