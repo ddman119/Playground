@@ -21,6 +21,7 @@ class PaddingOracle(object):
         xorstr = plaintext
 
         while pos >= 0:
+            print pos
             if (pos + 1) % 16 == 0:
                 ciphertext = ciphertext[:(pos+17)]
 
