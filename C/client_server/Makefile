@@ -1,6 +1,6 @@
 P=server
 OBJECTS=
-CFLAGS = -g
+CFLAGS = -g -Wall
 LDLIBS=
 CC=clang
 
