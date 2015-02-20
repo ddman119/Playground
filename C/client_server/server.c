@@ -15,10 +15,9 @@
 
 #define PORT "6000"
 
-static void server_halted();
 static int start_server(char *port_number);
 void list_directory_contents();
-static bool is_valid_file(char fileName[]);
+int handle_request(int descriptor);
 
 void sigchld_handler(int s)
 {
@@ -49,22 +48,14 @@ int main(int argc, char *argv[]) {
 
   // Start the server:
 
-  if (atexit(server_halted) != 0) {
-    printf("Failed to register exit handler.\n");
-  }
-
-  start_server(port_number);
   list_directory_contents();
+  start_server(port_number);
 
   // while (1) {
     // Wait for a connection
   // }
 
   return 0;
-}
-
-void server_halted() {
-  printf("Cleaning up; goodbye!\n");
 }
 
 int start_server(char *port_number) {
@@ -135,7 +126,7 @@ int start_server(char *port_number) {
 
     if (remote_fd == -1) {
       printf("Failed to accept connection\n");
-      continue;
+      exit(0);
     }
 
     inet_ntop(remote_address.ss_family, get_in_addr((struct sockaddr *)&remote_address), s, sizeof s);
@@ -143,12 +134,11 @@ int start_server(char *port_number) {
     printf("Server got connection from %s\n", s);
 
     if (!fork()) {
-      close(sock_fd);
+      close(sock_fd); // Close the listening socket, we won't be handling any more requests.
 
-      if (send(remote_fd, "Hello, world!", 13, 0) == -1) {
-        // Failed to send
-      }
+      handle_request(remote_fd);
 
+      printf("Cleaning up child process with ID %d\n\n", getpid());
       close(remote_fd);
       exit(0);
     }
@@ -165,19 +155,19 @@ void list_directory_contents() {
   {
     while ((dir = readdir(d)) != NULL)
     {
-      if (is_valid_file(dir->d_name)) {
-        printf("%s\n", dir->d_name);
-      }
+      printf("%s\n", dir->d_name);
     }
 
     closedir(d);
   }
 }
 
-bool is_valid_file(char fileName[]) {
-  if (!fileName) {
-    return false;
+int handle_request(int descriptor) {
+  printf("Handling request with descriptor: %d\n", descriptor);
+
+  if (send(descriptor, "Hello, world!\n", 13, 0) == -1) {
+    // Failed to send
   }
 
-  return true;
+  return 0;
 }
