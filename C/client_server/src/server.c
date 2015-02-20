@@ -12,12 +12,14 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <sys/time.h>
 
 #define PORT "6000"
 
 static int start_server(char *port_number);
 void list_directory_contents();
 int handle_request(int descriptor);
+ssize_t read_line(int sockd, void *voidbuffer, size_t maxLength);
 
 void sigchld_handler(int s)
 {
@@ -48,7 +50,7 @@ int main(int argc, char *argv[]) {
 
   // Start the server:
 
-  list_directory_contents();
+  /* list_directory_contents(); */
   start_server(port_number);
 
   // while (1) {
@@ -165,9 +167,46 @@ void list_directory_contents() {
 int handle_request(int descriptor) {
   printf("Handling request with descriptor: %d\n", descriptor);
 
-  if (send(descriptor, "Hello, world!\n", 13, 0) == -1) {
-    // Failed to send
+  for (int n = 1; n < 100; n++) {
+    char buffer[1024] = {0};
+    ssize_t size = read_line(descriptor, &buffer, 1024);
+
+    printf("Buffer: %s (size %lu)\n", buffer, size);
   }
 
+  /* if (send(descriptor, "Hello, world!\n", 13, 0) == -1) { */
+  /*   // Failed to send */
+  /* } */
+
   return 0;
+}
+
+ssize_t read_line(int sockd, void *voidbuffer, size_t maxLength) {
+  ssize_t n, rc;
+  char c, *buffer;
+
+  buffer = voidbuffer;
+
+  for (n = 1; n < maxLength; n++) {
+    if ((rc = read(sockd, &c, 1)) == 1) {
+      *buffer++ = c;
+
+      if (c == '\n') {
+        break;
+      }
+    }
+    else if (rc == 0) {
+      if (n == 1) {
+        return 0;
+      } else {
+        break;
+      }
+    }
+    else {
+      printf("Error in read_line\n");
+    }
+  }
+
+  *buffer = 0;
+  return n;
 }

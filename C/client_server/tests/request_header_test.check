@@ -1,0 +1,4 @@
+#include "../src/request_header.h"
+
+#test RequestHeaderTest
+  fail_unless(MAXIMUM_REQUEST_LINES == 2014, "Maximum lines incorrect");
