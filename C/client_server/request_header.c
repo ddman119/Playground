@@ -14,8 +14,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <stdio.h>
+#include <errno.h>
+#include <ctype.h>
 
-ssize_t read_line(int fd, void *void_pointer, size_t maximum_length) {
+ssize_t read_socket_line(int fd, void *void_pointer, size_t maximum_length) {
   ssize_t n, rc;
   char    c, *buffer;
 
@@ -37,7 +40,8 @@ ssize_t read_line(int fd, void *void_pointer, size_t maximum_length) {
     else {
       if ( errno == EINTR )
       continue;
-      Error_Quit("Error in Readline()");
+
+      exit(0);
     }
   }
 
@@ -73,6 +77,8 @@ void freeRequestHeader(struct RequestHeader *header) {
 }
 
 int parseHeader(char *buffer, struct RequestHeader *header) {
+  printf("Parsing header line: %s", buffer);
+
   static bool first_header_line = true;
   char *temp;
   char *endptr;
@@ -95,6 +101,8 @@ int parseHeader(char *buffer, struct RequestHeader *header) {
       header->method = UNSUPPORTED;
       header->statuscode = 501;
       return -1;
+
+      printf("Unsupported request\n");
     }
 
     /*  Skip to start of resource  */
@@ -184,13 +192,17 @@ int parseHeader(char *buffer, struct RequestHeader *header) {
   appropriate field value. This version only supports the
   "Referer:" and "User-Agent:" headers, ignoring all others.  */
 
-  if (!strcmp(temp, "USER-AGENT")) {
+  if (!strcmp(temp, "User-Agent")) {
     header->useragent = malloc(strlen(buffer) + 1);
     strcpy(header->useragent, buffer);
   }
-  else if (!strcmp(temp, "REFERER")) {
+  else if (!strcmp(temp, "Referer")) {
     header->referrer = malloc(strlen(buffer) + 1);
     strcpy(header->referrer, buffer);
+  }
+  else if (!strcmp(temp, "Host")) {
+    header->host = malloc(strlen(buffer) + 1);
+    strcpy(header->host, buffer);
   }
 
   free(temp);
@@ -199,9 +211,7 @@ int parseHeader(char *buffer, struct RequestHeader *header) {
 }
 
 int getRequest(int fd, struct RequestHeader *header) {
-  printf("Getting request for descriptor: %d\n", fd);
-
-  char   buffer[MAX_REQ_LINE] = {0};
+  char   buffer[1024] = {0};
   int    return_value;
   fd_set fds;
   struct timeval timeout;
@@ -222,7 +232,7 @@ int getRequest(int fd, struct RequestHeader *header) {
       return -1;
     }
     else {
-      read_line(fd, buffer, MAX_REQ_LINE - 1);
+      read_socket_line(fd, buffer, 1024 - 1);
       // Trim(buffer);
 
       if ( buffer[0] == '\0' ) {

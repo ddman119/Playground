@@ -174,7 +174,7 @@ int handle_request(int descriptor) {
   initRequestHeader(&header);
   getRequest(descriptor, &header);
 
-  printf("Header: %s", header.useragent);
+  printf("Request from host: %s", header.host);
 
 /*
   for (int n = 1; n < 100; n++) {
