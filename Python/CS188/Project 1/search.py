@@ -98,28 +98,35 @@ def depthFirstSearch(problem):
             print "Fringe is empty"
             return None
 
-        current_node = fringe.pop()
+        current_node_chain = fringe.pop()
+        current_node = current_node_chain[-1] # Return the node to evaluate.
         current_position = current_node
 
-        if len(current_node) is 3:
+        if len(current_node) is 3: # If the current node has a length of three, then it is not the starting node.
             current_position = current_node[0]
 
         if problem.isGoalState(current_position):
-            list = [node[1] for node in fringe.list]
-            print list
+            current_node_chain.pop(0) # Remove the starting position.
+            list = [node[1] for node in current_node_chain]
             return list
         else:
-            if current_node not in closed:
-                closed.add(current_node)
+            if current_position not in closed:
+                closed.add(current_position)
                 successors = problem.getSuccessors(current_position)
 
                 for successor in successors:
-                    fringe.push(successor)
+                    successor_array = current_node_chain + [successor]
+                    fringe.push(successor_array)
 
 def breadthFirstSearch(problem):
-    """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from util import Queue
+
+    closed = set()
+    fringe = Queue()
+
+    while True:
+        if fringe.isEmpty():
+            return None
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
