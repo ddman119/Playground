@@ -60,8 +60,8 @@ void *custom_malloc(size_t size) {
 
     if (!block) {
       // Failed to find a free block.
-
       block = request_space(last, size);
+
       if (!block) {
         return NULL;
       }
@@ -93,6 +93,8 @@ struct block_meta *find_free_block(struct block_meta **last_block, size_t size) 
   struct block_meta *current = global_base;
 
   while (current && !(current->free && current->size >= size)) {
+    // Keep track of the last block, so that if there aren't any suitable blocks
+    // then we can expand the heap from the last block in the list.
     *last_block = current;
     current = current->next;
   }
