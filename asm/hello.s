@@ -1,3 +1,8 @@
+# Hello, World
+#
+# as hello.s -o hello.o
+# ld hello.o -e _main -o hello
+
 .section __DATA,__data
 str:
   .asciz "Hello, world!\n"
@@ -8,7 +13,7 @@ _main:
   movq $0x2000004, %rax # The print system call
   movq $1, %rdi # Print to STDOUT
   movq str@GOTPCREL(%rip), %rsi # Look the string up with the GOT
-  movq $100, %rdx # Some size of the output
+  movq $14, %rdx
   syscall
 
   movq $0, %rbx # Exit with status code 0
