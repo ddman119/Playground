@@ -20,13 +20,15 @@ def sum_of_squares(list):
 def percentage(num, total):
     return (num / total)
 
-def character_frequencies(char_string):
+def character_frequencies(char_string, only_check_letter_count = False):
     processed_string = filter(str.isalnum, char_string)
     processed_string = processed_string.translate(None, digits)
 
     total_counter = collections.Counter(char_string)
     counter = collections.Counter(processed_string)
+
     total = sum(total_counter.values())
+
     frequency_table = [percentage(val, total) for val in counter.values()]
 
     return frequency_table
@@ -44,21 +46,12 @@ def key_length(ciphertext):
 
     while current_length <= MAXIMUM_LENGTH:
         selected_characters = ciphertext[::current_length]
+        decrypted_frequencies = character_frequencies(selected_characters)
+        sum_sq = sum_of_squares(decrypted_frequencies)
 
-        for character in range(0, 256):
-            # print "[KEY LENGTH] Trying char with ASCII code: %d" % character
-
-            decrypted_string = xor(selected_characters, character)
-            decrypted_frequencies = character_frequencies(decrypted_string)
-            sum_sq = sum_of_squares(decrypted_frequencies)
-
-            if sum_sq > highest_sum:
-                # print "[KEY LENGTH] Sum of squares for character: %f" % sum_sq
-                # print "[KEY LENGTH] New best string: %s" % decrypted_string
-                # print decrypted_frequencies
-
-                highest_sum = sum_sq
-                key_length = current_length
+        if sum_sq > highest_sum:
+            highest_sum = sum_sq
+            key_length = current_length
 
         current_length += 1
 
@@ -71,7 +64,7 @@ def decrypt_key(ciphertext, key_length):
     key = []
     index = 0
 
-    while index < 1: # key_length
+    while index < key_length:
         print "Decrypting key character at index: %d" % index
 
         stream = ciphertext[index::key_length]
@@ -79,24 +72,27 @@ def decrypt_key(ciphertext, key_length):
         char = 0
         best_decryption = ""
 
-        for character in range(0, 255):
-            processed_stream = xor(stream, character)
+        for character in range(1, 255):
+            candidate_stream = xor(stream, character)
 
-            decrypted_frequencies = character_frequencies(processed_stream)
-            sum_sq = sum_of_squares(decrypted_frequencies)
+            if valid_stream(candidate_stream):
+                frequencies = character_frequencies(candidate_stream, True)
+                sum_sq = sum_of_squares(frequencies)
 
-            if sum_sq > highest_sum:
-                highest_sum = sum_sq
-                char = character
-                best_decryption = processed_stream
+                number_of_spaces = candidate_stream.count(' ')
 
-        print "Decrypted key character with code: %d" % char
-        print "The best decryption was: %s" % best_decryption
-        print ""
+                if sum_sq >= highest_sum:
+                    highest_sum = sum_sq
+                    char = character
+                    best_decryption = candidate_stream
+
+        # print "Decrypted key character with code: %d" % char
+        # print "The best decryption was: %s" % best_decryption
+        # print ""
+
         key.append(chr(char))
         index += 1
 
-    print key
     return key
 
 def decrypt_message(message, key):
@@ -107,8 +103,6 @@ if __name__ == "__main__":
     print "Decrypting CT with length: %d" % len(CIPHERTEXT)
 
     length = key_length(CIPHERTEXT)
-    print "Key length: %d" % length
-
-    # key = decrypt_key(CIPHERTEXT, length)
-    # print "Key: %s" % key
-    # print decrypt_message(CIPHERTEXT, key)
+    key = decrypt_key(CIPHERTEXT, length)
+    print "Key: %s" % key
+    print decrypt_message(CIPHERTEXT, key)
