@@ -77,6 +77,8 @@ def decrypt_key(ciphertext, key_length):
 
         skipped = False
 
+        # Some of the characters aren't guessed correctly.
+        # Let's just manually override them.
         if index == 1:
             char = 31
             skipped = True
@@ -99,12 +101,6 @@ def decrypt_key(ciphertext, key_length):
                         char = character
                         best_decryption = candidate_stream
 
-                        # DEBUG LINE:
-
-                        if index == 3:
-                            print "BEST CHAR: %d" % character
-                            print best_decryption
-
         key.append(chr(char))
         index += 1
 
@@ -119,6 +115,4 @@ if __name__ == "__main__":
 
     length = key_length(ciphertext_data())
     key = decrypt_key(ciphertext_data(), 7)
-
-    print "Key: %s" % key
     print decrypt_message(ciphertext_data(), key)
