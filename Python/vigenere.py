@@ -68,8 +68,6 @@ def decrypt_key(ciphertext, key_length):
     index = 0
 
     while index < key_length:
-        print "Decrypting key character at index: %d\n" % index
-
         stream = ciphertext[index::key_length]
         highest_sum = 0
         char = 0
@@ -111,8 +109,6 @@ def decrypt_message(message, key):
     return ''.join(chr(ord(a) ^ ord(b)) for a, b in zip(message, expanded_key))
 
 if __name__ == "__main__":
-    print "Decrypting CT with length: %d" % len(ciphertext_data())
-
     length = key_length(ciphertext_data())
     key = decrypt_key(ciphertext_data(), 7)
     print decrypt_message(ciphertext_data(), key)
