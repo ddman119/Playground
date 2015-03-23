@@ -13,6 +13,9 @@ FREQUENCIES = [0.082, 0.015, 0.028, 0.043, 0.127, 0.022, 0.02, 0.061,
                0.001, 0.06, 0.063, 0.091, 0.028, 0.01, 0.024, 0.002,
                0.02, 0.001]
 
+def ciphertext_data():
+    return unhexlify(CIPHERTEXT)
+
 def sum_of_squares(list):
     squares = [i ** 2 for i in list]
     return sum(squares)
@@ -65,30 +68,42 @@ def decrypt_key(ciphertext, key_length):
     index = 0
 
     while index < key_length:
-        print "Decrypting key character at index: %d" % index
+        print "Decrypting key character at index: %d\n" % index
 
         stream = ciphertext[index::key_length]
         highest_sum = 0
         char = 0
         best_decryption = ""
 
-        for character in range(1, 255):
-            candidate_stream = xor(stream, character)
+        skipped = False
 
-            if valid_stream(candidate_stream):
-                frequencies = character_frequencies(candidate_stream, True)
-                sum_sq = sum_of_squares(frequencies)
+        if index == 1:
+            char = 31
+            skipped = True
+        elif index == 3:
+            char = 178
+            skipped = True
 
-                number_of_spaces = candidate_stream.count(' ')
+        if skipped == False:
+            for character in range(1, 255):
+                candidate_stream = xor(stream, character)
 
-                if sum_sq >= highest_sum:
-                    highest_sum = sum_sq
-                    char = character
-                    best_decryption = candidate_stream
+                if valid_stream(candidate_stream):
+                    frequencies = character_frequencies(candidate_stream, True)
+                    sum_sq = sum_of_squares(frequencies)
 
-        # print "Decrypted key character with code: %d" % char
-        # print "The best decryption was: %s" % best_decryption
-        # print ""
+                    number_of_spaces = candidate_stream.count(' ')
+
+                    if sum_sq >= highest_sum:
+                        highest_sum = sum_sq
+                        char = character
+                        best_decryption = candidate_stream
+
+                        # DEBUG LINE:
+
+                        if index == 3:
+                            print "BEST CHAR: %d" % character
+                            print best_decryption
 
         key.append(chr(char))
         index += 1
@@ -100,9 +115,10 @@ def decrypt_message(message, key):
     return ''.join(chr(ord(a) ^ ord(b)) for a, b in zip(message, expanded_key))
 
 if __name__ == "__main__":
-    print "Decrypting CT with length: %d" % len(CIPHERTEXT)
+    print "Decrypting CT with length: %d" % len(ciphertext_data())
 
-    length = key_length(CIPHERTEXT)
-    key = decrypt_key(CIPHERTEXT, length)
+    length = key_length(ciphertext_data())
+    key = decrypt_key(ciphertext_data(), 7)
+
     print "Key: %s" % key
-    print decrypt_message(CIPHERTEXT, key)
+    print decrypt_message(ciphertext_data(), key)

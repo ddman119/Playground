@@ -16,6 +16,6 @@ _main:
   movq $14, %rdx
   syscall
 
-  movq $0, %rbx # Exit with status code 0
+  movq $1, %rbx # Exit with status code 0
   movq $0x2000001, %rax
   syscall
