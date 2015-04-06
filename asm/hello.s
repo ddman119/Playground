@@ -4,7 +4,7 @@
 # ld hello.o -e _main -o hello
 
 .section __DATA,__data
-str:
+hello:
   .asciz "Hello, world!\n"
 
 .section __TEXT,__text
@@ -12,7 +12,7 @@ str:
 _main:
   movq $0x2000004, %rax # The print system call
   movq $1, %rdi # Print to STDOUT
-  movq str@GOTPCREL(%rip), %rsi # Look the string up with the GOT
+  movq hello@GOTPCREL(%rip), %rsi # Look the string up with the GOT
   movq $14, %rdx
   syscall
 
