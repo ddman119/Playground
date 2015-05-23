@@ -2,6 +2,7 @@ extern crate rand;
 
 use std::io::prelude::*;
 use std::io;
+use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
@@ -21,4 +22,10 @@ fn main() {
 
     print!("You guessed {}", guess);
     println!("The secret number was {}", random_number);
+
+    match guess.cmp(&random_number) {
+        Ordering::Less => println!("Too low!"),
+        Ordering::Equal => println!("You win!"),
+        Ordering::Greater => println!("Too high!"),
+    }
 }
