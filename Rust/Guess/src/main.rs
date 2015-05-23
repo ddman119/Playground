@@ -1,6 +1,6 @@
 extern crate rand;
 
-use std::io::prelude::*; 
+use std::io::prelude::*;
 use std::io;
 use rand::Rng;
 
