@@ -20,12 +20,16 @@ fn main() {
         .ok()
         .expect("Failed to read your guess.");
 
-    print!("You guessed {}", guess);
+    let guess: u32 = guess.trim().parse()
+        .ok()
+        .expect("Failed to convert guess to integer.");
+
+    println!("You guessed {}", guess);
     println!("The secret number was {}", random_number);
 
-    // match guess.cmp(&random_number) {
-    //     Ordering::Less => println!("Too low!"),
-    //     Ordering::Equal => println!("You win!"),
-    //     Ordering::Greater => println!("Too high!"),
-    // }
+    match guess.cmp(&random_number) {
+        Ordering::Less => println!("Too low!"),
+        Ordering::Equal => println!("You win!"),
+        Ordering::Greater => println!("Too high!"),
+    }
 }
