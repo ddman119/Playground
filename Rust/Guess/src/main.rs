@@ -6,30 +6,36 @@ use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
-    println!("Guess the number!");
-    print!("Please enter a guess: ");
-
-    io::stdout().flush()
-        .ok()
-        .expect("Could not flush stdout");
-
     let random_number = rand::thread_rng().gen_range(1, 101);
-    let mut guess = String::new();
 
-    io::stdin().read_line(&mut guess)
-        .ok()
-        .expect("Failed to read your guess.");
+    loop {
+        println!("Guess the number!");
+        print!("Please enter a guess: ");
 
-    let guess: u32 = guess.trim().parse()
-        .ok()
-        .expect("Failed to convert guess to integer.");
+        io::stdout().flush()
+            .ok()
+            .expect("Could not flush stdout");
 
-    println!("You guessed {}", guess);
-    println!("The secret number was {}", random_number);
+        let mut guess = String::new();
 
-    match guess.cmp(&random_number) {
-        Ordering::Less => println!("Too low!"),
-        Ordering::Equal => println!("You win!"),
-        Ordering::Greater => println!("Too high!"),
+        io::stdin().read_line(&mut guess)
+            .ok()
+            .expect("Failed to read your guess.");
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        println!("You guessed {}", guess);
+
+        match guess.cmp(&random_number) {
+            Ordering::Less => println!("Too low!"),
+            Ordering::Greater => println!("Too high!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
+        }
     }
 }
