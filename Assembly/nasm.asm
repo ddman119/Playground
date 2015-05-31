@@ -1,10 +1,12 @@
   %define SYSCALL_WRITE 0x2000004
   %define SYSCALL_EXIT 0x2000001
 
-global start
+section .data
+  msg: db "Hello, world!", 10
+  .len: equ $ - msg
 
 section .text
-
+  global start
 start:
   mov rax, SYSCALL_WRITE
   mov rdi, 1
@@ -15,8 +17,3 @@ start:
   mov rax, SYSCALL_EXIT
   mov rdi, 0
   syscall
-
-section .data
-
-msg: db "Hello, world!", 10
-.len: equ $ - msg
